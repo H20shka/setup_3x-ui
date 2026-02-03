@@ -26,32 +26,28 @@ echo "=== Начало установки 3x-ui ==="
 echo "Шаг 1: Обновление списка пакетов..."
 apt update || error_exit "Не удалось обновить пакеты"
 
-# Шаг 2: Установка Git
-echo "Шаг 2: Установка Git..."
-apt install -y git || error_exit "Не удалось установить Git"
-
-# Шаг 3: Установка Docker и Docker Compose
-echo "Шаг 3: Установка Docker и Docker Compose..."
+# Шаг 2: Установка Docker и Docker Compose
+echo "Шаг 2: Установка Docker и Docker Compose..."
 apt install -y docker.io docker-compose || error_exit "Не удалось установить Docker"
 
-# Шаг 4: Клонирование репозитория 3x-ui
-echo "Шаг 4: Клонирование репозитория 3x-ui..."
+# Шаг 3: Клонирование репозитория 3x-ui
+echo "Шаг 3: Клонирование репозитория 3x-ui..."
 git clone https://github.com/MHSanaei/3x-ui.git || error_exit "Не удалось клонировать репозиторий"
 
-# Шаг 5: Переход в директорию
-echo "Шаг 5: Переход в директорию 3x-ui..."
+# Шаг 4: Переход в директорию
+echo "Шаг 4: Переход в директорию 3x-ui..."
 cd 3x-ui || error_exit "Директория 3x-ui не найдена"
 
-# Шаг 6: Переключение на версию
-echo "Шаг 6: Переключение на версию v1.4.6..."
+# Шаг 5: Переключение на версию
+echo "Шаг 5: Переключение на версию v1.4.6..."
 git checkout v1.4.6 || error_exit "Не удалось переключиться на версию v1.4.6"
 
-# Шаг 7: Запуск в фоне
-echo "Шаг 7: Запуск 3x-ui в фоне..."
+# Шаг 6: Запуск в фоне
+echo "Шаг 6: Запуск 3x-ui в фоне..."
 docker-compose up -d || error_exit "Не удалось запустить 3x-ui"
 
-# Шаг 8: Определение IP-адреса и проверка доступности
-echo "Шаг 8: Определение внешнего IP-адреса сервера..."
+# Шаг 7: Определение IP-адреса и проверка доступности
+echo "Шаг 7: Определение внешнего IP-адреса сервера..."
 SERVER_IP=$(curl -s --connect-timeout 5 ifconfig.me 2>/dev/null || \
             curl -s --connect-timeout 5 ipinfo.io/ip 2>/dev/null || \
             curl -s --connect-timeout 5 icanhazip.com 2>/dev/null || \
@@ -90,7 +86,7 @@ while [ $ATTEMPT -le $MAX_ATTEMPTS ]; do
     ((ATTEMPT++))
 done
 
-# Шаг 9: Завершение
+# Шаг 8: Завершение
 echo ""
 echo "=== Установка завершена успешно! ==="
 echo ""
